@@ -7,10 +7,10 @@ import java.util.*
 
 
 @RestController
-@RequestMapping("/simple")
+@RequestMapping("/messages")
 class SimpleController {
 
-    @GetMapping(value = ["/display"])
+    @GetMapping
     fun getMessages() : List<Message> {
         return listOf(
                 Message(
@@ -26,20 +26,20 @@ class SimpleController {
         )
     }
 
-    @PutMapping(value = ["/insert"])
+    @PutMapping
     fun insertMessage(@RequestBody message: Message) : Message {
         message.id = UUID.randomUUID().toString()
         return message
     }
 
-    @PostMapping(value = ["/update"])
+    @PostMapping
     fun updateMessage(@RequestBody message: Message) : Message {
         message.title += "UPDATED TITLE:${getDate()}"
         message.message += "UPDATED MESSAGE:${getDate()}"
         return message
     }
 
-    @DeleteMapping(value = ["/delete/{id}"])
+    @DeleteMapping(value = ["/{id}"])
     fun deleteMessage(@PathVariable(name = "id") id: String): Boolean {
         return true
     }
